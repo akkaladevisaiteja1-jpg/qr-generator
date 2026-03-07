@@ -3,38 +3,59 @@ import { QRCodeCanvas } from "qrcode.react";
 
 function App() {
 
-  const [text, setText] = useState("");
-  const [qr, setQr] = useState("");
+const [name,setName] = useState("");
+const [dob,setDob] = useState("");
+const [phone,setPhone] = useState("");
+const [email,setEmail] = useState("");
 
-  const generateQR = () => {
-    setQr(text);
-  };
+const memberURL = `https://akkaladevisaiteja1-jpg.github.io/qr-generator/?name=${name}&dob=${dob}&phone=${phone}&email=${email}`;
 
-  return (
-    <div style={{textAlign:"center",marginTop:"50px"}}>
+return (
 
-      <h1>QR Code Generator</h1>
-      <label>date of birth : </label>
-      <input type = "datetime-local"/>
-<br></br>
-<br></br>
-      <input
-        type="text"
-        placeholder="Enter text"
-        value={text}
-        onChange={(e)=>setText(e.target.value)}
-      />
+<div style={{textAlign:"center"}}>
 
-      <br/><br/>
+<h1>Member Registration</h1>
 
-      <button onClick={generateQR}>Generate QR</button>
+<input
+placeholder="Name"
+onChange={(e)=>setName(e.target.value)}
+/>
 
-      <br/><br/>
+<br/><br/>
 
-      {qr && <QRCodeCanvas value={qr} size={200} />}
+<input
+type="date"
+onChange={(e)=>setDob(e.target.value)}
+/>
 
-    </div>
-  );
+<br/><br/>
+
+<input
+placeholder="Phone"
+onChange={(e)=>setPhone(e.target.value)}
+/>
+
+<br/><br/>
+
+<input
+placeholder="Email"
+onChange={(e)=>setEmail(e.target.value)}
+/>
+
+<br/><br/>
+
+<QRCodeCanvas value={memberURL} size={200}/>
+
+<br/><br/>
+
+<button onClick={()=>window.print()}>
+Print QR
+</button>
+
+</div>
+
+)
+
 }
 
 export default App;
